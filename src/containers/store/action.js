@@ -72,7 +72,9 @@ export function createNewLabel(options) {
   return (dispatch) => {
     return axios.post(`${apiUrl}/todo/label/create`, {...options} )
       .then(response => {
-        dispatch(success(CREATE_LABEL, response.data))
+        if(response.status >= 200 && response.status < 300) {
+          dispatch(success(CREATE_LABEL, response.data))
+        }
       })
       .catch(err=> {
         if(err.response) {
@@ -86,7 +88,9 @@ export function fetchLabels() {
   return (dispatch) => {
     return axios.get(`${apiUrl}/todo/labels/fetch`)
       .then(response => {
-        dispatch(success(FETCH_LABELS, response.data.labels))
+        if(response.status >= 200 && response.status < 300) {
+          dispatch(success(FETCH_LABELS, response.data.labels))
+        }
       })
       .catch(err=> {
         if(err.response) {
