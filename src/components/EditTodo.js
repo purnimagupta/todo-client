@@ -23,16 +23,59 @@ class EditTodo extends React.Component {
   }
   handleCheckboxChange = (e) => {
     const status = e.target.checked ? "done" : "todo";
-    const { id, item } = this.props;
     //update the status of todo and write action for it
+    this.updateItem({
+      status: status
+    });
+  }
+
+  onEditClick = () => {
+    this.setState({
+      isEditing: true
+    });
+  }
+  
+  onClickCancel= () => {
+    this.setState({
+      isEditing: false
+    })
+  }
+  handleLabelChange = (label) => {
+    console.log(label)
+    this.setState({
+      bucket: label
+    });
+  }
+
+  saveTodo = () => {
+    const { todo, bucket } = this.state;
+
+    this.updateItem({
+      todo,
+      bucket,
+    });
+
+    this.setState({
+      isEditing:false
+    });
+  }
+
+  updateItem = (itemField) => {
+    const { id, item } = this.props;
     this.props.updateTodo(id, {
       ...item,
-      status
+      ...itemField
     });
-    
+  }
+
+  handleInputChange = (e) => {
+    const { value } = e.target;
+    this.setState({
+      todo: value
+    });
   }
   renderDisplayMode = () => {
-    const { item, labels } = this.props;
+    const { item } = this.props;
     return (
       <Card
         title={<Tag color="magenta">{item.bucket.label}</Tag>}
@@ -46,7 +89,7 @@ class EditTodo extends React.Component {
             >
             {item.status === "todo" ? "Mark as done" : "Completed"}
           </Checkbox>,
-          <Icon type="edit" key="edit"/>
+          <Icon type="edit" key="edit" onClick={this.onEditClick}/>
         ]}
       >
         { this.state.todo}
@@ -55,7 +98,38 @@ class EditTodo extends React.Component {
     
   }
   renderEditMode = () => {
-    console.log("show input box when in edit mode")
+    const { item, labels, createNewLabel } = this.props;
+    const { todo, bucket } = this.state;
+    return (
+      <Card
+        title={<Tag color="magenta">{item.bucket.label}</Tag>}
+        extra={[
+          <Icon type="delete" key="delete" onClick={this.onDelete}/>
+        ]}
+        actions={[
+          <Checkbox 
+            checked={item.status==="done"} 
+            onChange={this.handleCheckboxChange}
+            >
+            {item.status === "todo" ? "Mark as done" : "Completed"}
+          </Checkbox>,
+          <Icon type="check-circle" key="check-circle" onClick={this.saveTodo}/>,
+          <Icon type="close-circle" key="close-circle" onClick={this.onClickCancel}/>
+          
+        ]}
+      >
+        <div>
+          <TextArea type="text" value={todo} onChange={this.handleInputChange} key={this.props.id}/>
+          <SelectLabel
+            size="small"
+            defaultLabel={bucket}
+            labels={labels}
+            handleLabelChange={this.handleLabelChange}
+            createNewLabel={createNewLabel}
+            />
+        </div>
+      </Card>
+    );  
   }
   render() {
     
