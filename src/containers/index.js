@@ -1,5 +1,7 @@
-import CreateTodo from '../containers/CreateTodo';
+import CreateTodo from './CreateTodo';
+import TodoList from './TodoList';
 
 export {
-  CreateTodo
-}
+  CreateTodo,
+  TodoList,
+};

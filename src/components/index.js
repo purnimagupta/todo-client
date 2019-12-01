@@ -1,5 +1,7 @@
+import EditTodo from './EditTodo';
 import SelectLabel from './SelectLabel';
 
 export {
-  SelectLabel
-}
+  EditTodo,
+  SelectLabel,
+};
