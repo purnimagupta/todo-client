@@ -115,3 +115,29 @@ export function deleteTodo(id) {
       });
   };
 }
+
+/* 
+  params(id, todo)
+  const todo = {
+    todo,
+    status,
+    bucket,
+    createdAt?
+  }
+*/
+export function updateTodo(id, todo) {
+  // todo is an object  which is why we're using the spread operator
+  return (dispatch) => {
+    return axios.patch(`${apiUrl}/todo/${id}`, {id, ...todo})
+      .then(response => {
+          if (response.status >= 200 && response.status < 300) {
+            dispatch(success(UPDATE_TODO, response.data.todos))
+          }
+      })
+      .catch(err => {
+        if(err.response){
+          return dispatch(error(UPDATE_TODO_ERROR, err.response))
+        }
+      });
+  };
+}

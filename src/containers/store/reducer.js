@@ -1,4 +1,4 @@
-import { ADD_TODO, FETCH_TODOS, CREATE_LABEL, FETCH_LABELS, DELETE_TODO } from './action';
+import { ADD_TODO, FETCH_TODOS, CREATE_LABEL, FETCH_LABELS, DELETE_TODO, UPDATE_TODO } from './action';
 
 export const defaultTodoPageProps= {
   todos: [],
@@ -36,6 +36,19 @@ export function reducer(state = defaultTodoPageProps, action){
       return {
         labels: state.labels,
         todos: action.data
+      }
+    case UPDATE_TODO:
+      // update the item which has been changed and return it.
+      const updateTodos = state.todos.map(item => {
+        if(item._id === action.data._id) {
+          item = action.data;
+        }
+        return item;
+      });
+      return {
+        defaultLabel: state.defaultLabel,
+        labels: state.labels,
+        todos: updateTodos
       }
     default:
       return state;

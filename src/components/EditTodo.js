@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Tag, Checkbox, Card, Icon, Input } from 'antd';
+import styled from 'styled-components';
 
 import SelectLabel from './SelectLabel';
 
@@ -20,7 +21,16 @@ class EditTodo extends React.Component {
     //call action
     deleteTodo(id);
   }
-
+  handleCheckboxChange = (e) => {
+    const status = e.target.checked ? "done" : "todo";
+    const { id, item } = this.props;
+    //update the status of todo and write action for it
+    this.props.updateTodo(id, {
+      ...item,
+      status
+    });
+    
+  }
   renderDisplayMode = () => {
     const { item, labels } = this.props;
     return (
@@ -31,20 +41,15 @@ class EditTodo extends React.Component {
         ]}
         actions={[
           <Checkbox 
-            style={checkboxStyle}
-            checked={item.status==="done"} 
+            checked={item.status==="done"}
+            onChange={this.handleCheckboxChange} 
             >
             {item.status === "todo" ? "Mark as done" : "Completed"}
           </Checkbox>,
           <Icon type="edit" key="edit"/>
         ]}
       >
-        <p>
-          <span>
-            {this.state.todo}
-          </span>
-
-        </p>
+        { this.state.todo}
       </Card>
     );
     
@@ -61,15 +66,6 @@ class EditTodo extends React.Component {
       </Fragment>
    )
   }
-}
-
-const checkboxStyle = {
-};
-
-const label = {
-  "color": "white",
-  "padding": "8px",
-  "backgroundColor": "#4CAF50" 
 }
 
 export default EditTodo;
