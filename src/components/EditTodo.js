@@ -15,13 +15,19 @@ class EditTodo extends React.Component {
     }
   }
 
+  onDelete = () => {
+    const { id, deleteTodo } = this.props;
+    //call action
+    deleteTodo(id);
+  }
+
   renderDisplayMode = () => {
     const { item, labels } = this.props;
     return (
       <Card
         title={<Tag color="magenta">{item.bucket.label}</Tag>}
         extra={[
-          <Icon type="delete" key="delete"/>
+          <Icon type="delete" key="delete" onClick={this.onDelete}/>
         ]}
         actions={[
           <Checkbox 

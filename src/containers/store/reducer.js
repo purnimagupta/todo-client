@@ -1,4 +1,4 @@
-import { ADD_TODO, FETCH_TODOS, CREATE_LABEL, FETCH_LABELS } from './action';
+import { ADD_TODO, FETCH_TODOS, CREATE_LABEL, FETCH_LABELS, DELETE_TODO } from './action';
 
 export const defaultTodoPageProps= {
   todos: [],
@@ -30,9 +30,13 @@ export function reducer(state = defaultTodoPageProps, action){
     case FETCH_LABELS:
       return {
         todos: state.todos,
-        labels: action.data
-        
-    }
+        labels: action.data    
+      }
+    case DELETE_TODO:
+      return {
+        labels: state.labels,
+        todos: action.data
+      }
     default:
       return state;
   }

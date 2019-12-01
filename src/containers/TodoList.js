@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import {EditTodo} from '../components/index';
 
-import { saveTodo, fetchTodos, createNewLabel } from './store/action';
+import { saveTodo, fetchTodos, createNewLabel, deleteTodo } from './store/action';
 import { getTodos, getLabels, getDefaultLabel } from './store/selecters';
 
 class TodoList extends React.Component {
@@ -20,7 +20,7 @@ class TodoList extends React.Component {
   }
  
   render() {
-    const { todos, labels, defaultLabel, createNewLabel} = this.props;
+    const { todos, labels, defaultLabel, createNewLabel, deleteTodo} = this.props;
 
     const list = todos.map((item) => {
       return(
@@ -32,6 +32,7 @@ class TodoList extends React.Component {
           labels={labels}
           defaultLabel={defaultLabel}
           createNewLabel={createNewLabel}
+          deleteTodo={deleteTodo}
         />
       );
     });
@@ -60,4 +61,5 @@ export default connect(mapStateToProps, {
   createNewLabel: createNewLabel,
   fetchTodos: fetchTodos,
   saveTodo: saveTodo,
+  deleteTodo: deleteTodo
 })(TodoList);

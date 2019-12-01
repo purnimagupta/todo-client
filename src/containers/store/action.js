@@ -99,3 +99,19 @@ export function fetchLabels() {
       });
   };
 }
+
+export function deleteTodo(id) {
+  return (dispatch) => {
+    return axios.delete(`${apiUrl}/todo/${id}`, {data: {id: id}})
+      .then(response => {
+        if(response.status >= 200 && response.status < 300) {
+          dispatch(success(DELETE_TODO, response.data.todos))
+        }
+      })
+      .catch(err=> {
+        if(err.response) {
+          console.log(err.response)
+        }
+      });
+  };
+}
