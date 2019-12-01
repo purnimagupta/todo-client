@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 import styled from 'styled-components';
-import { CreateTodo } from './containers/index';
 import { configureStore, configureDefaultState} from './store/index';
+import { CreateTodo, TodoList } from './containers/index';
 const { Header } = Layout
 
 
@@ -22,6 +22,7 @@ function App() {
 
         <TodoContainer>
           <CreateTodo small/>
+          <TodoList/>
         </TodoContainer>
 
       </Layout>
