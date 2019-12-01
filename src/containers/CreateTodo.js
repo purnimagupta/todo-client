@@ -10,11 +10,11 @@ import { getLabels, getDefaultLabel } from './store/selecters';
 const { TextArea } = Input;
 
 class CreateTodo extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       todo: "",
-      // bucket: props.defaultLabel,
+      bucket: props.defaultLabel,
     }
   }
 
@@ -49,6 +49,10 @@ class CreateTodo extends React.Component {
     if(todo) {
       this.props.saveTodo(todo, bucket);
     }
+    this.setState({
+      todo: '',
+      bucket: ''
+    });
   }
 
   render() {
