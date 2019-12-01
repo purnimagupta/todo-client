@@ -9,7 +9,7 @@ function createOption (label) {
   }
 }
 
-const SelectLable = (props) => {
+const SelectLabel = (props) => {
 
   const { labels, defaultLabel, createNewLabel, handleLabelChange } = props;
 
@@ -24,7 +24,7 @@ const SelectLable = (props) => {
     }
   }
   return(
-    <StyledDiv size={props.size}>
+    <StyledDiv size={props.size} data-component="creatable_select_dropdown">
       <CreatableSelect
         isClearable
         onChange={handleChange}
@@ -46,4 +46,4 @@ const StyledDiv = styled.div`
   }};
 `;
 
-export default SelectLable;
+export default SelectLabel;

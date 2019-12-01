@@ -9,7 +9,7 @@ import { createNewLabel, fetchLabels, saveTodo } from './store/action';
 import { getLabels, getDefaultLabel } from './store/selecters';
 const { TextArea } = Input;
 
-class CreateTodo extends React.Component {
+export class CreateTodo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,16 +60,22 @@ class CreateTodo extends React.Component {
     const { labels, createNewLabel } = this.props;
     return (
       <StyledDiv props={this.props}>
-        <TextArea placeholder="Enter your todo items" value={todo} onChange={this.handleInputChange}/>
+        <TextArea name="createTodo_textArea" placeholder="Enter your todo items" value={todo} onChange={this.handleInputChange}/>
         <InputActions>
           <SelectLabel 
+            name="createTodo_selectOptions"
             size="medium"
             defaultLabel={ bucket }
             labels={labels}
             handleLabelChange={this.handleLabelChange}
             createNewLabel={createNewLabel}
           />
-          <StyledButton onClick={this.handleClick}>Create Todo</StyledButton>
+          <StyledButton 
+            name="createTodo_submitButton"
+            onClick={this.handleClick}
+          >
+            Create Todo
+          </StyledButton>
         </InputActions>
       </StyledDiv>
     )

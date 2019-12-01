@@ -8,7 +8,7 @@ import {EditTodo} from '../components/index';
 import { saveTodo, fetchTodos, createNewLabel, deleteTodo, updateTodo } from './store/action';
 import { getTodos, getLabels, getDefaultLabel } from './store/selecters';
 
-class TodoList extends React.Component {
+export class TodoList extends React.Component {
   constructor(props) {
     super();
     this.state = {
@@ -38,7 +38,7 @@ class TodoList extends React.Component {
       );
     });
     return (
-      <StyledDiv>
+      <StyledDiv name="display_todo_list">
         {list}
       </StyledDiv> 
     )
