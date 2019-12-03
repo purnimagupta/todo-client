@@ -52,7 +52,7 @@ describe("<CreateTodo />", () => {
         }
       ]
     )
-    console.log((wrapper.find("SelectLabel[name='createTodo_selectOptions']").props().labels))
+    // console.log((wrapper.find("SelectLabel[name='createTodo_selectOptions']").props().labels))
   });
 
 

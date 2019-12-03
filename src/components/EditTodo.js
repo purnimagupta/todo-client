@@ -89,7 +89,7 @@ class EditTodo extends React.Component {
             >
             {item.status === "todo" ? "Mark as done" : "Completed"}
           </Checkbox>,
-          <Icon type="edit" key="edit" onClick={this.onEditClick}/>
+          <Icon type="edit" key="edit" name="edit_icon" onClick={this.onEditClick}/>
         ]}
       >
         { this.state.todo}
